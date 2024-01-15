@@ -25,12 +25,13 @@ public class Gravitation {
 
 
     private boolean isAnyObjectBelowStone(SuperObject stone) {
-        Rectangle stoneRect = new Rectangle(stone.worldX, stone.worldY, gp.tileSize, gp.tileSize);
+        Rectangle stoneRect = new Rectangle(stone.worldX, stone.worldY , gp.tileSize, gp.tileSize);
 
         for (int i = 0; i < gp.obj.length; i++) {
-            if (gp.obj[i] != null && gp.obj[i] != stone) {
+            if (gp.obj[i] != null) {
                 Rectangle objRect = new Rectangle(gp.obj[i].worldX, gp.obj[i].worldY, gp.tileSize, gp.tileSize);
-                if (stoneRect.intersects(objRect)) {
+
+                if (stoneRect.intersection(gp.obj[i].solidArea) != null && (gp.obj[i].worldY > stone.worldY)) {
                     return true;
                 }
             }
@@ -38,6 +39,7 @@ public class Gravitation {
 
         return false;
     }
+
 
     public void stoneGravitation() {
         for (int i = 0; i < gp.obj.length; i++) {
@@ -59,6 +61,19 @@ public class Gravitation {
 
 
     public void crystalGravitation() {
+    	
+    	for (int i = 0; i < gp.obj.length; i++) {
+            if (gp.obj[i] != null && gp.obj[i].name.equals("Crystal") && gp.obj[i].gravitation) {
+                int crystalCol = gp.obj[i].worldX / gp.tileSize;
+                int crystalRow = gp.obj[i].worldY / gp.tileSize;
+
+               
+                if (crystalRow + 1 < gp.maxWorldRow && gp.tileM.mapTileNum[crystalCol][crystalRow + 1] == 2
+                        && !isAnyObjectBelowStone(gp.obj[i]) && !isEntityBelowStone(gp.obj[i], gp.player)) {
+                    gp.obj[i].worldY += gp.tileSize; 
+                }
+            }
+        }
         
     }
 }

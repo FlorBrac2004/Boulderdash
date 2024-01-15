@@ -19,7 +19,7 @@ public class Player extends Entity {
     public final int screenX;
     public final int screenY;
     
-    int hasCrystal = 0; // display anzeigen wievie man hat
+    public int hasCrystal = 0; 
 
     private int movementDelay = 4; // Set the delay in update cycles
     private int movementCounter = 0;
@@ -31,7 +31,7 @@ public class Player extends Entity {
         screenX = gp.screenWidth / 2;
         screenY = gp.screenHeight / 2;
 
-        solidArea = new Rectangle(0, 0, 1, 1);
+        solidArea = new Rectangle(1, 1, 1, 1);
         solidAreaDefaultX = 0;
         solidAreaDefaultY = 0;
 
