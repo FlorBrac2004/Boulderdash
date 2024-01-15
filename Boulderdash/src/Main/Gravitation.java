@@ -19,7 +19,7 @@ public class Gravitation {
                 entity.worldX + entity.solidArea.x, 
                 entity.worldY + entity.solidArea.y + entity.solidArea.height, entity.solidArea.width,  entity.solidArea.height);
 
-        // Allow a gap between the stone and the player (e.g., 5 pixels)
+        
         return stoneRect.intersects(entityRect) && (stone.worldY + gp.tileSize - entity.worldY > 5);
     }
 
@@ -45,10 +45,10 @@ public class Gravitation {
                 int stoneCol = gp.obj[i].worldX / gp.tileSize;
                 int stoneRow = gp.obj[i].worldY / gp.tileSize;
 
-                // Check if there is no object below the stone except tile with index 2 (Background)
+               
                 if (stoneRow + 1 < gp.maxWorldRow && gp.tileM.mapTileNum[stoneCol][stoneRow + 1] == 2
                         && !isAnyObjectBelowStone(gp.obj[i]) && !isEntityBelowStone(gp.obj[i], gp.player)) {
-                    gp.obj[i].worldY += gp.tileSize; // Move the stone down
+                    gp.obj[i].worldY += gp.tileSize; 
                 }
             }
         }
@@ -59,6 +59,6 @@ public class Gravitation {
 
 
     public void crystalGravitation() {
-        // Implement crystal gravitation logic if needed
+        
     }
 }
